@@ -5,6 +5,7 @@ import 'package:carousel_slider/carousel_slider.dart';
 // import 'package:carousel_slider/carousel_state.dart';
 import 'package:carousel_slider/carousel_options.dart';
 import 'package:smooth_page_indicator/smooth_page_indicator.dart';
+import 'package:url_launcher/url_launcher.dart';
 
 class Corousel extends StatefulWidget {
   Corousel({Key key}) : super(key: key);
@@ -38,7 +39,7 @@ class _CorouselState extends State<Corousel> {
                   itemCount: imag.length,
                   itemBuilder: (context, index, realIndex) {
                     final actImg = imag[index];
-                    return buildImage(actImg, index);
+                    return imageButton(actImg, index);
                   },
                   options: CarouselOptions(
                       height: 400,
@@ -53,13 +54,27 @@ class _CorouselState extends State<Corousel> {
                           activeIndex = index;
                         });
                       },
-                      autoPlayInterval: Duration(seconds: 2))),
+                      autoPlayInterval: Duration(seconds: 4))),
             ),
             const SizedBox(
               height: 32,
             ),
             buildIndicator(),
           ],
+        ));
+  }
+
+  Widget imageButton(String actImag, index) {
+    return OutlinedButton(
+        onPressed: () {
+          launch('https://www.google.com');
+        },
+        child: Container(
+          margin: EdgeInsets.symmetric(horizontal: 24),
+          decoration: BoxDecoration(
+              // color: Colors.grey,
+              image: DecorationImage(
+                  fit: BoxFit.fill, image: AssetImage(actImag))),
         ));
   }
 
